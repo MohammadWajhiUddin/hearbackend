@@ -35,6 +35,8 @@ connectToDb((err)=>{
 
 
 //routes
-
+app.get('/', (req, res) => {
+    res.json("Welcome to heart care backend, deployment successfull");
+  });
 
 app.use("/HeartAttackDB/Users",UsersRouter);
