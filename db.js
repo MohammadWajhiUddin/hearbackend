@@ -1,11 +1,17 @@
 const {MongoClient }  = require('mongodb')
 
 let dbConnection
+
+const uri = "mongodb+srv://heartdiseasepredictor:4HIcrbdpZrtZCen3@heartdiseasepredictor.pyz2hy7.mongodb.net/?retryWrites=true&w=majority&appName=heartdiseasePredictor"
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 module.exports ={
     connectToDb: (cb) => {
-        MongoClient.connect('mongodb://localhost:27017/HeartAttackDB')
+
+      
+        client.connect('mongodb+srv://heartdiseasepredictor:4HIcrbdpZrtZCen3@heartdiseasepredictor.pyz2hy7.mongodb.net/?retryWrites=true&w=majority&appName=heartdiseasePredictor')
             .then((client)=>{
-                    dbConnection  = client.db();
+                    dbConnection  = client.db('heartcaredb');
                     return cb()
             })
             .catch(err => {

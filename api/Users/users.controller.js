@@ -1,11 +1,15 @@
 const { connectToDb, getDb } = require("../../db");
 const { ObjectId } = require("mongodb");
+let db;
 
 connectToDb((err) => {
   if (!err) {
     db = getDb();
   }
 });
+
+
+
 
 module.exports = {
   // getUsers:(req,res)=>{
@@ -70,16 +74,23 @@ module.exports = {
 
   // },
 
-  registerUser: (req, res) => {
-    console.log("kkkk", req.body);
-    const users = req.body;
-    console.log(users);
-    db.collection("users")
-      .insertOne(users)
+
+
+  registerUser: async(req, res) => {
+    
+      const users = req.body;
+  
+
+      // Create a new database and collection
+    
+      const collection = db.collection('final');
+      const result = await collection.insertOne(users)
       .then((result) => res.status(201).json(result))
       .catch((err) =>
         res.status(500).json({ error: "could not create new documents" })
       );
+
+  
   },
 
   loginUser: (req, res) => {
