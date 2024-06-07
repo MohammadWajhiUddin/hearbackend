@@ -149,6 +149,25 @@ module.exports = {
       }
   },
 
+
+  getHealthlogdata: async (req, res) => {
+    const { user_id } = req.params;
+
+    try {
+      await client.connect();
+      const database = client.db('heartcaredb');
+      const collection = database.collection('Healthlog');
+      const results = await collection.find({ user_id: user_id }).project({ SysBP: 1, DiaBP: 1, HR: 1, _id: 0 }).limit(10).toArray();
+
+      res.status(200).json(results);
+  } catch (err) {
+      console.error('Error fetching last 10 values:', err);
+      res.status(500).json({ error: 'Failed to fetch last 10 values' });
+  } finally {
+      await client.close();
+  }
+  },
+
   // addMultipleUsers:(req,res)=>{
   //     const users = req.body
   //     db.collection('users')

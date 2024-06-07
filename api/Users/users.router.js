@@ -8,7 +8,8 @@ const {
     // getSingleUserBasedOnDifferentParameter,
     registerUser,
     loginUser,
-    adduserhealthlogs
+    adduserhealthlogs,
+    getHealthlogdata
     // addMultipleUsers,
     // deleteSingleUser,
     // deleteMultipleUsersBasedOnCertailCriteria,
@@ -23,7 +24,7 @@ const {
 router.post("/registerUser",registerUser);
 router.post("/loginUser",loginUser);
 router.post("/adduserhealthlogs",adduserhealthlogs);
-
+router.get("/getHealthlogdata/:user_id",getHealthlogdata);
 // router.post("/addMultipleUsers",addMultipleUsers);
 // router.delete("/deleteSingleUser/:userid",deleteSingleUser);
 // router.delete("/deleteMultipleUsersBasedOnCertailCriteria/:userage",deleteMultipleUsersBasedOnCertailCriteria);
