@@ -101,24 +101,34 @@ module.exports = {
     
     const usershealthlog = req.body;
 
+    try {
+      await client.connect();
+      const database = client.db('heartcaredb');
+      const collection = database.collection('Healthlog');
+      const result = await collection.insertOne(usershealthlog)
+      .then((result) => res.status(201).json(result))
+      .catch((err) =>
+        res.status(500).json({ error: "could not create new documents" })
+      );   
+     } catch (err) {
+  } finally {
+      await client.close();
+  }
 
-    // Create a new database and collection
-  
-    const collection = db.collection('Healthlog');
-    const result = await collection.insertOne(usershealthlog)
-    .then((result) => res.status(201).json(result))
-    .catch((err) =>
-      res.status(500).json({ error: "could not create new documents" })
-    );
 
 
 },
 
-  loginUser: (req, res) => {
+  loginUser: async (req, res) => {
+    
+    try {
     const { userEmail, userPassword } = req.body;
-    db.collection("users")
-      .findOne({ userEmail: userEmail })
+    await client.connect();
+    const database = client.db('heartcaredb');
+    const collection  = database.collection('users')
+    const result = await collection.findOne({ userEmail: userEmail })
       .then((user) => {
+        console.log(user)
         if (user) {
           if (user.userPassword === userPassword) {
             res.status(201).json({result:"success",data:user});
@@ -132,6 +142,11 @@ module.exports = {
       .catch((err) =>
         res.status(500).json({ error: "could not create new documents" })
       );
+    }
+      catch (err) {
+      } finally {
+          await client.close();
+      }
   },
 
   // addMultipleUsers:(req,res)=>{
