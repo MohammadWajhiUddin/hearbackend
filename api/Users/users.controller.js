@@ -83,7 +83,7 @@ module.exports = {
 
       // Create a new database and collection
     
-      const collection = db.collection('users');
+      const collection = db.collection("users");
       const result = await collection.insertOne(users)
       .then((result) => res.status(201).json(result))
       .catch((err) =>
