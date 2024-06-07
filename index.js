@@ -6,7 +6,6 @@ const port = 3000;
 const host = '0.0.0.0';
 
 
-const { MongoClient } = require('mongodb');
 
 // Connection URL
 const url = 'mongodb+srv://heartdiseasepredictor:4HIcrbdpZrtZCen3@heartdiseasepredictor.pyz2hy7.mongodb.net/?retryWrites=true&w=majority&appName=heartdiseasePredictor';
