@@ -1,15 +1,13 @@
-const { connectToDb, getDb } = require("../../db");
-const { ObjectId } = require("mongodb");
-let db;
+//const { ObjectId } = require("mongodb");
+const { MongoClient } = require('mongodb');
 
-connectToDb((err) => {
-  if (!err) {
-    db = getDb();
-  }
+const uri = 'mongodb+srv://heartdiseasepredictor:4HIcrbdpZrtZCen3@heartdiseasepredictor.pyz2hy7.mongodb.net/?retryWrites=true&w=majority&appName=heartdiseasePredictor';
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    serverSelectionTimeoutMS: 60000, // Increase timeout to 60 seconds
 });
 
-
-
+const db="a";
 
 module.exports = {
   // getUsers:(req,res)=>{
@@ -79,16 +77,22 @@ module.exports = {
   registerUser: async(req, res) => {
     
       const users = req.body;
-  
+      try {
+        await client.connect();
+        const database = client.db('heartcaredb');
+        const collection = database.collection('users');
+        const result = await collection.insertOne(users)
+        .then((result) => res.status(201).json(result))
+        .catch((err) =>
+          res.status(500).json({ error: "could not create new documents" })
+        );   
+       } catch (err) {
+    } finally {
+        await client.close();
+    }
 
-      // Create a new database and collection
     
-      const collection = db.collection("users");
-      const result = await collection.insertOne(users)
-      .then((result) => res.status(201).json(result))
-      .catch((err) =>
-        res.status(500).json({ error: "could not create new documents" })
-      );
+  
 
   
   },
