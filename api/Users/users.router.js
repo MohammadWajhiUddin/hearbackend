@@ -7,7 +7,8 @@ const {
     // getSingleUserBasedOnId,
     // getSingleUserBasedOnDifferentParameter,
     registerUser,
-    loginUser
+    loginUser,
+    adduserhealthlogs
     // addMultipleUsers,
     // deleteSingleUser,
     // deleteMultipleUsersBasedOnCertailCriteria,
@@ -21,6 +22,7 @@ const {
 // router.get("/getSingleUserBasedOnDifferentParameter/:age",getSingleUserBasedOnDifferentParameter);
 router.post("/registerUser",registerUser);
 router.post("/loginUser",loginUser);
+router.post("/adduserhealthlogs",adduserhealthlogs);
 
 // router.post("/addMultipleUsers",addMultipleUsers);
 // router.delete("/deleteSingleUser/:userid",deleteSingleUser);

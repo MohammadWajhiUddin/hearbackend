@@ -83,7 +83,7 @@ module.exports = {
 
       // Create a new database and collection
     
-      const collection = db.collection('Users');
+      const collection = db.collection('users');
       const result = await collection.insertOne(users)
       .then((result) => res.status(201).json(result))
       .catch((err) =>
@@ -92,6 +92,23 @@ module.exports = {
 
   
   },
+
+  adduserhealthlogs: async(req, res) => {
+    
+    const usershealthlog = req.body;
+
+
+    // Create a new database and collection
+  
+    const collection = db.collection('Healthlog');
+    const result = await collection.insertOne(usershealthlog)
+    .then((result) => res.status(201).json(result))
+    .catch((err) =>
+      res.status(500).json({ error: "could not create new documents" })
+    );
+
+
+},
 
   loginUser: (req, res) => {
     const { userEmail, userPassword } = req.body;
