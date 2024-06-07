@@ -34,6 +34,3 @@ app.get('/s', (req, res) => {
 app.use("/HeartAttackDB/Users",UsersRouter);
 
 
-app.listen(port, host, () => {
-    console.log(`Server running at http://${host}:${port}/`);
-  });
