@@ -157,7 +157,7 @@ module.exports = {
       await client.connect();
       const database = client.db('heartcaredb');
       const collection = database.collection('Healthlog');
-      const results = await collection.find({ user_id: user_id }).project({ SysBP: 1, DiaBP: 1, HR: 1, _id: 0 }).limit(10).toArray();
+      const results = await collection.find({ user_id: user_id }).project({ SysBP: 1, DiaBP: 1, HR: 1, _id: 0 ,age:1}).limit(10).toArray();
 
       res.status(200).json(results);
   } catch (err) {
