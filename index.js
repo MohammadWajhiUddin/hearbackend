@@ -1,9 +1,25 @@
 const express = require('express')
-
 const app = express()
+const { MongoClient } = require('mongodb');
 
 const port = 3000;
 const host = '0.0.0.0';
+
+
+const { MongoClient } = require('mongodb');
+
+// Connection URL
+const url = 'mongodb+srv://heartdiseasepredictor:4HIcrbdpZrtZCen3@heartdiseasepredictor.pyz2hy7.mongodb.net/?retryWrites=true&w=majority&appName=heartdiseasePredictor';
+
+// Create a new MongoClient
+const client = new MongoClient(url);
+
+// Use connect method to connect to the server
+client.connect(err => {
+  if (err) throw err;
+  console.log("Connected successfully to server");
+  client.close();
+});
 
 
 
@@ -32,6 +48,8 @@ app.get('/s', (req, res) => {
   });
 
 app.use("/HeartAttackDB/Users",UsersRouter);
+
+
 app.listen(port, host, () => {
     console.log(`Server running at http://${host}:${port}/`);
   });
