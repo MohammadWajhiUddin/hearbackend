@@ -1,9 +1,9 @@
 const express = require('express')
-const {connectToDb, getDb} = require('./db')
-const { ObjectId } = require('mongodb')
+
 const app = express()
 
-
+const port = 3000;
+const host = '0.0.0.0';
 
 
 
@@ -32,5 +32,6 @@ app.get('/s', (req, res) => {
   });
 
 app.use("/HeartAttackDB/Users",UsersRouter);
-
-
+app.listen(port, host, () => {
+    console.log(`Server running at http://${host}:${port}/`);
+  });
