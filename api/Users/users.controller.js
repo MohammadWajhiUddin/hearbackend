@@ -168,6 +168,29 @@ module.exports = {
   }
   },
 
+
+  
+  ContactForm: async(req, res) => {
+    
+    const data = req.body;
+
+    try {
+      await client.connect();
+      const database = client.db('heartcaredb');
+      const collection = database.collection('ContactForm');
+      const result = await collection.insertOne(data)
+      .then((result) => res.status(201).json(result))
+      .catch((err) =>
+        res.status(500).json({ error: "could not create new documents" })
+      );   
+     } catch (err) {
+  } finally {
+      await client.close();
+  }
+
+
+
+},
   // addMultipleUsers:(req,res)=>{
   //     const users = req.body
   //     db.collection('users')
